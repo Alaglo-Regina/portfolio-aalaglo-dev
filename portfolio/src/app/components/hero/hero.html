@@ -1,31 +1,88 @@
 <section id="accueil" class="band hero">
-  <div class="container hero-grid">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+
+  <!-- GIANT BACKGROUND MOCK IDE -->
+  <div class="mock-ide bg-ide" aria-hidden="true">
+    <div class="ide-header">
+      <span class="dot close"></span><span class="dot min"></span><span class="dot max"></span>
+    </div>
+    <div class="ide-body">
+<pre><code><span class="k">const</span> <span class="v">developer</span> <span class="o">=</span> {{ '{' }}
+  <span class="p">name:</span> <span class="s">"Amélé Alaglo"</span>,
+  <span class="p">roles:</span> [
+    <span class="s">"Full-Stack Dev"</span>,
+    <span class="s">"Mobile Engineer"</span>
+  ],
+  <span class="p">stack:</span> {{ '{' }}
+    <span class="p">frontend:</span> [<span class="s">"Angular"</span>, <span class="s">"React"</span>],
+    <span class="p">backend:</span> [<span class="s">"Nest.js"</span>, <span class="s">"Node"</span>],
+    <span class="p">mobile:</span> [<span class="s">"Flutter"</span>, <span class="s">"Dart"</span>]
+  {{ '}' }},
+  <span class="f">build</span>: <span class="k">async</span> () =&gt; {{ '{' }}
+    <span class="k">await</span> <span class="v">coffee</span>.drink();
+    <span class="k">return</span> <span class="v">success</span>;
+  {{ '}' }}
+{{ '}' }};</code></pre>
+    </div>
+  </div>
+
+  <div class="container hero-grid" style="position:relative; z-index:1;">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> Disponible pour de nouveaux projets</div>
-      <h1 class="hero-title">Amélé Alaglo,<br>développeuse<br><span class="accent">web &amp; mobile</span></h1>
-      <p class="hero-text">Basée à Lomé, au Togo, je conçois des applications mobiles et des plateformes web professionnelles, de l'analyse des besoins jusqu'au déploiement.</p>
+      <div class="status-badge"><span class="pulse"></span> Disponible pour de nouveaux projets</div>
+      <h1 class="hero-title"><span class="script-text" style="color: var(--band-accent);">Amélé Alaglo,</span><br>Développeuse <span class="text-gradient">Web &amp; Mobile</span></h1>
+      <p class="hero-text">Basée à Lomé, je développe des solutions full-stack robustes. Des portails de services publics (Angular, Nest.js) aux applications mobiles métier (Flutter), je transforme des besoins complexes en interfaces performantes et sécurisées.</p>
       <div class="cta-row">
-        <a class="btn btn-solid-band" href="#projets">Voir mes projets</a>
-        <a class="btn btn-ghost-band" href="#contact">Me contacter</a>
+        <a class="btn-glow" href="#projets">Voir mes projets</a>
+        <a class="btn-outline-arrow" href="#contact">Me contacter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <div class="quick-facts">
-        <div><b>Lomé, Togo</b>Basée à</div>
-        <div><b>JS · Flutter · WordPress</b>Spécialités</div>
-        <div><b>FR / EN</b>Langues</div>
+      <div class="bento-facts">
+        <div class="bento-card">
+          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="bento-content"><b>Lomé, Togo</b></div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <div class="bento-content"><b>JS · Flutter · WP</b></div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></div>
+          <div class="bento-content"><b>FR / EN</b></div>
+        </div>
       </div>
     </div>
 
-    <div class="photo-wrap">
-      <div class="photo-shadowblock" aria-hidden="true"></div>
-      <div class="photo-frame">
-        <span class="photo-sticker">Hello 👋</span>
-        <div class="photo-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span>Photo à venir</span>
+      <div class="photo-wrap">
+        <div class="photo-shadowblock" aria-hidden="true"></div>
+        <div class="photo-frame">
+          <img src="assets/images/photo amle.png" alt="Amélé Alaglo" class="profile-photo" />
         </div>
-        <div class="photo-caption"><b>Amélé Alaglo</b><small>Web &amp; Mobile Dev</small></div>
       </div>
-    </div>
   </div>
 </section>
-<div class="divider"></div>
+<div class="tech-divider">
+  <div class="tech-track">
+    <div class="tech-track-group">
+      @for (tool of techStack; track tool.name) {
+        <img
+          class="tech-logo"
+          [src]="tool.icon"
+          [alt]="tool.name"
+          [title]="tool.name"
+          loading="lazy"
+          (error)="$event.target.style.display='none'"
+        />
+      }
+    </div>
+    <div class="tech-track-group" aria-hidden="true">
+      @for (tool of techStack; track tool.name) {
+        <img
+          class="tech-logo"
+          [src]="tool.icon"
+          [alt]="''"
+          loading="lazy"
+          (error)="$event.target.style.display='none'"
+        />
+      }
+    </div>
+  </div>
+</div>
