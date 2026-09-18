@@ -1,48 +1,27 @@
 <!doctype html>
 <html lang="fr" data-theme="light">
+
 <head>
   <meta charset="utf-8">
-  <script>
-    // Empêche le navigateur de sauter directement à la section correspondant
-    // au #hash de l'URL (ex: #apropos) au rechargement : on repart toujours en haut.
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-    window.scrollTo(0, 0);
-    window.addEventListener('load', function () {
-      window.scrollTo(0, 0);
-      if (window.location.hash) {
-        history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
-    });
-  </script>
-  <title>Amélé Alaglo — Développeuse Web &amp; Mobile</title>
-  <meta name="description" content="Amélé Alaglo, développeuse Web &amp; Mobile basée à Lomé. Applications full-stack robustes : portails de services publics (Angular, Nest.js), applications mobiles métier (Flutter) et sites WordPress sur-mesure.">
+  <title>Amélé Alaglo | Développeuse Web &amp; Mobile</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link id="favicon" rel="icon" type="image/png" href="assets/logo.png">
-
-  <!-- Open Graph / aperçu de lien (WhatsApp, LinkedIn, Facebook...) -->
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="Amélé Alaglo — Portfolio">
-  <meta property="og:title" content="Amélé Alaglo — Développeuse Web &amp; Mobile">
-  <meta property="og:description" content="Développeuse Web &amp; Mobile basée à Lomé. Des portails de services publics (Angular, Nest.js) aux applications mobiles métier (Flutter), je transforme des besoins complexes en interfaces performantes et sécurisées.">
-  <meta property="og:image" content="assets/logo.png">
-  <meta property="og:url" content="/">
-
-  <!-- Twitter / X card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Amélé Alaglo — Développeuse Web &amp; Mobile">
-  <meta name="twitter:description" content="Développeuse Web &amp; Mobile basée à Lomé. Des portails de services publics (Angular, Nest.js) aux applications mobiles métier (Flutter).">
-  <meta name="twitter:image" content="assets/logo.png">
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Parisienne&display=swap"
+    rel="stylesheet">
   <style>
     /* Splash Screen Styles */
     #splash-screen {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--bg, #FFFFFF); /* Light by default or var(--bg) */
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg, #FFFFFF);
+      /* Light by default or var(--bg) */
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -51,23 +30,28 @@
       z-index: 99999;
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     html[data-theme="dark"] #splash-screen {
       background: #09090B;
     }
+
     #splash-screen.fade-out {
       opacity: 0;
       transform: scale(1.05);
       pointer-events: none;
     }
+
     .splash-logo-container {
       width: 100px;
       animation: pulseLogo 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     .splash-logo-container img {
       width: 100%;
       height: auto;
       display: block;
     }
+
     .splash-text {
       font-family: "Unbounded", sans-serif;
       font-size: 1rem;
@@ -79,9 +63,11 @@
       animation: fadeInText 1s ease forwards;
       animation-delay: 0.3s;
     }
+
     html[data-theme="dark"] .splash-text {
       color: #FAFAFA;
     }
+
     .splash-loader {
       width: 140px;
       height: 2px;
@@ -91,38 +77,73 @@
       overflow: hidden;
       margin-top: -10px;
     }
+
     .splash-loader::after {
       content: "";
       position: absolute;
-      left: 0; top: 0; height: 100%;
+      left: 0;
+      top: 0;
+      height: 100%;
       background: #8B5CF6;
       border-radius: 4px;
       animation: loadProgress 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
+
     @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.2)); }
-      50% { transform: scale(1.1); filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.6)); }
+
+      0%,
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.2));
+      }
+
+      50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.6));
+      }
     }
+
     @keyframes fadeInText {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     @keyframes loadProgress {
-      0% { width: 0%; }
-      40% { width: 45%; }
-      80% { width: 90%; }
-      100% { width: 100%; }
+      0% {
+        width: 0%;
+      }
+
+      40% {
+        width: 45%;
+      }
+
+      80% {
+        width: 90%;
+      }
+
+      100% {
+        width: 100%;
+      }
     }
   </style>
 </head>
+
 <body>
   <div id="splash-screen">
     <div class="splash-logo-container">
-      <img id="splash-logo" src="assets/logo.png" alt="Chargement..." />
+      <img src="assets/logo.png" alt="Chargement..." />
     </div>
-    <div class="splash-text">A²JR</div>
+    <div class="splash-text">Amélé Alaglo</div>
     <div class="splash-loader"></div>
   </div>
   <app-root></app-root>
 </body>
+
 </html>
