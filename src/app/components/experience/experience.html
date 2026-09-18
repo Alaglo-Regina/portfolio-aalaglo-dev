@@ -1,16 +1,16 @@
-<section id="experience" class="band band-alt" style="padding:96px 0;">
+<section id="experience" class="band" style="padding:96px 0;">
   <div class="container">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div class="watermark">Parcours</div>
-      <div class="sec-eyebrow">Parcours</div>
-      <h2 class="sec-title" style="color:var(--band-text);">Mon parcours</h2>
+      <div class="sec-eyebrow">Expérience</div>
+      <h2 class="sec-title" style="color:var(--band-text);">Mon Parcours</h2>
     </div>
 
     <div class="parcours-block">
       <h3 class="parcours-subtitle">Expérience professionnelle</h3>
       <div class="experience-grid">
         @for (job of jobs; track job.role; let i = $index) {
-          <div class="t-card layout-row sticky-card" [style.top.px]="120 + (i * 24)">
+          <div class="t-card layout-row reveal" [style.transition-delay]="(i * 0.1) + 's'">
             @if (job.logos) {
               <div class="t-card-logos">
                 @for (logo of job.logos; track logo) {
@@ -42,7 +42,7 @@
       <h3 class="parcours-subtitle">Formation</h3>
       <div class="experience-grid">
         @for (item of education; track item.role; let i = $index) {
-          <div class="t-card layout-row sticky-card" [style.top.px]="120 + (i * 24)">
+          <div class="t-card layout-row reveal" [style.transition-delay]="(i * 0.1) + 's'">
             @if (item.logos) {
               <div class="t-card-logos">
                 @for (logo of item.logos; track logo) {

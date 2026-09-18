@@ -1,0 +1,48 @@
+<section id="projets" class="paper">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="watermark">Projets</div>
+      <div class="sec-eyebrow">Réalisations</div>
+      <h2 class="sec-title">Projets</h2>
+      <p class="sec-sub">Services publics, immobilier, sites WordPress sur-mesure.</p>
+    </div>
+
+    <div class="proj-grid">
+      @for (p of projects; track p.title; let i = $index) {
+        <article class="proj-card reveal" [style.transition-delay]="(i * 0.1) + 's'">
+          @if (p.image) {
+            <div class="proj-shot"><img [src]="p.image" [alt]="p.imageAlt" loading="lazy"></div>
+          } @else {
+            <div class="proj-shot placeholder">{{ p.placeholderText }}</div>
+          }
+          <div class="proj-body">
+            <span class="proj-title">{{ p.title }}</span>
+            <p class="proj-desc">{{ p.description }}</p>
+            <div class="proj-foot">
+              <div class="tag-row">
+                @for (tag of p.tags; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+              <div class="proj-actions">
+                @if (p.link) {
+                  <a [href]="p.link" target="_blank" rel="noopener noreferrer" class="proj-link">
+                    Voir le site
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                }
+                @if (p.statusBadge) {
+                  <span class="status-badge">{{ p.statusBadge }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

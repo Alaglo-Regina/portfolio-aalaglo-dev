@@ -14,6 +14,9 @@ const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
   styleUrl: './hero.css',
 })
 export class Hero {
+  readonly githubLink = 'https://github.com/Alaglo-Regina';
+  readonly linkedinLink = 'https://linkedin.com/in/r%C3%A9gina-alaglo';
+
   readonly techStack: TechLogo[] = [
     { name: 'HTML5', icon: `${DEVICON_BASE}/html5/html5-original.svg` },
     { name: 'CSS3', icon: `${DEVICON_BASE}/css3/css3-original.svg` },

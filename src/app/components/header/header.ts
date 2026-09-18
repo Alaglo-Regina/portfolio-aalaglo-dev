@@ -20,6 +20,7 @@ export class Header implements OnInit, OnDestroy {
   protected readonly indicator = signal<Indicator>({ left: 0, percentage: 0, visible: false });
   protected activeSectionId = signal<string>('accueil');
   protected readonly currentLang = signal<'fr' | 'en'>('fr');
+  protected readonly scrollProgress = signal<number>(0);
   private observer: IntersectionObserver | null = null;
 
   readonly navLinks = [
@@ -27,7 +28,7 @@ export class Header implements OnInit, OnDestroy {
     { href: '#apropos', label: 'À propos' },
     { href: '#competences', label: 'Compétences' },
     { href: '#projets', label: 'Projets' },
-    { href: '#experience', label: 'Expérience' },
+    { href: '#experience', label: 'Parcours' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -45,6 +46,14 @@ export class Header implements OnInit, OnDestroy {
   @HostListener('window:resize')
   onResize() {
     this.updateIndicatorToActive();
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    this.scrollProgress.set(scrolled);
   }
 
   private setupObserver() {
@@ -76,7 +85,7 @@ export class Header implements OnInit, OnDestroy {
     const linkRect = link.getBoundingClientRect();
     const left = linkRect.left - navRect.left + linkRect.width / 2;
     const percentage = left / navRect.width;
-    
+
     this.indicator.set({
       left,
       percentage,

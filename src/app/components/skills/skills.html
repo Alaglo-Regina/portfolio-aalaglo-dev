@@ -1,6 +1,6 @@
 <section id="competences" class="band band-alt" style="padding:96px 0;">
   <div class="container">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <div class="watermark">Skills</div>
       <div class="sec-eyebrow">Savoir-faire</div>
       <h2 class="sec-title" style="color:var(--band-text);">Compétences</h2>
@@ -8,8 +8,8 @@
     </div>
 
     <div class="skills-grid">
-      @for (card of skillCards; track card.title) {
-        <div class="skill-card">
+      @for (card of skillCards; track card.title; let i = $index) {
+        <div class="skill-card reveal" [style.transition-delay]="(i * 0.1) + 's'">
           <div class="skill-card-content">
             <div class="skill-header">
               <div class="skill-icon">
