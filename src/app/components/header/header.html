@@ -1,8 +1,9 @@
 <header class="site">
   <div class="container nav-row">
-    <div class="logo">
-      <span class="logo-text">Amélé<span>.</span>Alaglo</span>
-    </div>
+    <a class="logo" href="/" aria-label="Retour à l'accueil">
+      <img class="logo-img" [src]="theme.current() === 'dark' ? 'assets/logo-dark.png' : 'assets/logo.png'" alt="Logo Amélé Alaglo" />
+      <span class="logo-text">A²JR</span>
+    </a>
     <nav class="main-nav" (mouseleave)="onNavLeave()">
       <svg class="nav-snake" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true">
         <path 
@@ -41,15 +42,25 @@
       <button
         class="burger"
         type="button"
-        aria-label="Ouvrir le menu"
+        [class.open]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? 'Fermer le menu' : 'Ouvrir le menu'"
         (click)="toggleMenu()"
       ><span></span></button>
     </div>
   </div>
+  <div class="mobile-menu-backdrop" [class.open]="menuOpen()" (click)="closeMenu()"></div>
   <div class="container" id="mobileMenu" [class.open]="menuOpen()">
     @for (link of navLinks; track link.href) {
-      <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      <a [href]="link.href" [class.is-active]="activeSectionId() === link.href.substring(1)" (click)="closeMenu()">{{ link.label }}</a>
     }
+    <div class="mobile-menu-theme">
+      <span>Thème</span>
+      <button class="theme-toggle" type="button" aria-label="Changer de thème" (click)="theme.toggle()" [class.is-dark]="theme.current() === 'dark'">
+        <span class="icon sun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span>
+        <span class="icon moon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg></span>
+        <div class="toggle-thumb"></div>
+      </button>
+    </div>
   </div>
 </header>
 <!-- Progress Bar -->
