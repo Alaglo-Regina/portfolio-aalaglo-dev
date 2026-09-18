@@ -1,4 +1,4 @@
-# Portfolio — Amélé Alaglo
+# Portfolio — A²JR
 
 Site portfolio réalisé avec [Angular](https://angular.dev) (v20).
 
