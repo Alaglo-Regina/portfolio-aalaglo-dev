@@ -55,10 +55,10 @@ export class Experience {
       org: 'Université de Lomé (Lomé, Togo)',
       logos: ['assets/Université de lomé logo.png'],
     },
-    {
-      date: '2018–19',
-      role: 'BAC C4',
-      org: 'Lycée de Gbenyedzi (Lomé, Togo)',
-    },
+    /*     {
+          date: '2018–19',
+          role: 'BAC C4',
+          org: 'Lycée de Gbenyedzi (Lomé, Togo)',
+        }, */
   ];
 }

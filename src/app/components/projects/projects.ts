@@ -67,19 +67,19 @@ export class Projects {
       imageAlt: 'Aperçu du site LAC3',
       link: 'https://lacs3.mairie.tg/',
     },
-    {
+    /* {
       title: 'Friend of Figma',
       description: "Site vitrine WordPress conçu pour la communauté Figma locale, présentant les événements et les ressources du groupe.",
       tags: ['WordPress'],
       placeholderText: 'Capture à venir',
       link: 'https://fof.tg/',
-    },
-    {
-      title: 'Gestion de biens immobiliers',
-      description: "Application mobile Flutter pour la gestion interne des biens immobiliers : suivi des locations, des contrats et des paiements.",
-      tags: ['Flutter'],
-      placeholderText: 'Application interne',
-      statusBadge: 'Projet interne',
-    },
+    }, */
+    /*  {
+       title: 'Gestion de biens immobiliers',
+       description: "Application mobile Flutter pour la gestion interne des biens immobiliers : suivi des locations, des contrats et des paiements.",
+       tags: ['Flutter'],
+       placeholderText: 'Application interne',
+       statusBadge: 'Projet interne',
+     }, */
   ];
 }
