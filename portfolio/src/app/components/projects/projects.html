@@ -18,12 +18,12 @@
           <div class="proj-body">
             <span class="proj-title">{{ project.title }}</span>
             <p class="proj-desc">{{ project.description }}</p>
-            <div class="tag-row">
-              @for (tag of project.tags; track tag) {
-                <span class="tag">{{ tag }}</span>
-              }
-            </div>
             <div class="proj-foot">
+              <div class="tag-row">
+                @for (tag of project.tags; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
               @if (project.link) {
                 <a class="proj-link" [href]="project.link" target="_blank" rel="noopener">
                   Voir le site

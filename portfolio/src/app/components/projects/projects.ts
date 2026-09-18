@@ -21,7 +21,7 @@ export class Projects {
   readonly projects: Project[] = [
     {
       title: 'Tech Santé',
-      description: 'Portail de services publics (moteur de templates).',
+      description: "Portail public du ministère de la Santé (IA-Challenge) : rendu de pages côté serveur avec Nest.js et le moteur de templates EJS.",
       tags: ['Nest.js', 'EJS'],
       image: 'assets/images/proj-1.jpg',
       imageAlt: 'Aperçu du site Tech Santé',
@@ -29,7 +29,7 @@ export class Projects {
     },
     {
       title: "Middleware d'orchestration",
-      description: 'Front-end du portail des services publics.',
+      description: "Interface front-end du portail national des services publics du Togo, connectée à un middleware qui orchestre les démarches administratives.",
       tags: ['Angular'],
       image: 'assets/images/proj-2.jpg',
       imageAlt: 'Aperçu du guichet national des démarches administratives',
@@ -37,7 +37,7 @@ export class Projects {
     },
     {
       title: 'Urbex',
-      description: 'Plateforme immobilière (thème WordPress).',
+      description: "Thème WordPress sur-mesure pour une plateforme immobilière : présentation des biens, recherche et fiches détaillées.",
       tags: ['WordPress'],
       image: 'assets/images/proj-3.jpg',
       imageAlt: 'Aperçu du site Urbex',
@@ -45,7 +45,7 @@ export class Projects {
     },
     {
       title: 'CDA',
-      description: 'Thème WordPress créé from scratch.',
+      description: "Thème WordPress développé entièrement from scratch pour le site vitrine de la CDA, avec une maquette et une structure personnalisées.",
       tags: ['WordPress', 'Thème custom'],
       image: 'assets/images/proj-4.jpg',
       imageAlt: 'Aperçu du site CDA',
@@ -53,7 +53,7 @@ export class Projects {
     },
     {
       title: 'CERT',
-      description: 'Thème WordPress créé from scratch.',
+      description: "Thème WordPress sur-mesure pour le site du CERT togolais, dédié à la réponse aux incidents de sécurité informatique.",
       tags: ['WordPress', 'Thème custom'],
       image: 'assets/images/proj-5.jpg',
       imageAlt: 'Aperçu du site CERT',
@@ -61,7 +61,7 @@ export class Projects {
     },
     {
       title: 'LAC3',
-      description: 'Thème WordPress créé from scratch.',
+      description: "Thème WordPress créé from scratch pour le site de la mairie, présentant les services municipaux et les actualités locales.",
       tags: ['WordPress', 'Thème custom'],
       image: 'assets/images/proj-6.jpg',
       imageAlt: 'Aperçu du site LAC3',
@@ -69,14 +69,14 @@ export class Projects {
     },
     {
       title: 'Friend of Figma',
-      description: 'Site WordPress livré pour la communauté Figma locale.',
+      description: "Site vitrine WordPress conçu pour la communauté Figma locale, présentant les événements et les ressources du groupe.",
       tags: ['WordPress'],
       placeholderText: 'Capture à venir',
       link: 'https://fof.tg/',
     },
     {
       title: 'Gestion de biens immobiliers',
-      description: 'Application mobile Flutter de gestion de biens immobiliers.',
+      description: "Application mobile Flutter pour la gestion interne des biens immobiliers : suivi des locations, des contrats et des paiements.",
       tags: ['Flutter'],
       placeholderText: 'Application interne',
       statusBadge: 'Projet interne',
