@@ -23,13 +23,23 @@ export class App implements AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('is-revealed');
         }
       });
     }, {
-      rootMargin: '0px 0px -12% 0px',
+      rootMargin: '0px 0px -10% 0px',
       threshold: 0.1
     });
+
+    // Handle splash screen
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      setTimeout(() => {
+        splash.classList.add('fade-out');
+        setTimeout(() => splash.remove(), 800); // Remove after transition
+      }, 2500); // 2.5s loading time
+    }
 
     // Need a tiny timeout to ensure child components are rendered
     setTimeout(() => {
