@@ -277,14 +277,27 @@ nav.main-nav a.is-active{
   #mobileMenu.open{ display:flex; flex-direction:column; padding:8px 0 18px; }
   #mobileMenu a{ padding:11px 4px; font-size:15px; font-weight:600; text-decoration:none; color:var(--band-dim); }
 }
+@media (max-width:640px){
+  .nav-row{ padding:12px 0; }
+  .logo{ font-size:1.5rem; padding:6px 10px; }
+  .nav-right{ gap:8px; }
+  .lang-btn{ padding:0 8px; }
+  .lang-btn .lang-text{ display:none; }
+  .theme-toggle{ transform:scale(0.85); transform-origin:right center; }
+}
 
 /* ============ HERO (statement band) ============ */
 .band{ background:var(--band-bg); color:var(--band-text); position:relative; }
 .band-alt{ background:var(--band-bg-2); }
 
 .hero{ padding:80px 0 110px; overflow:hidden; position:relative; }
-.hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.hero-content{ position:relative; z-index:1; }
 @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:56px; } }
+@media (max-width:640px){
+  .hero{ padding:56px 0 72px; }
+  .photo-wrap::before{ top:-40px; right:-40px; bottom:-40px; left:-40px; }
+}
 
 /* Hero Background Grid */
 .hero-bg-grid {
@@ -308,7 +321,7 @@ nav.main-nav a.is-active{
 .pulse{ display:inline-block; width:8px; height:8px; background:#10B981; border-radius:50%; box-shadow:0 0 0 0 rgba(16,185,129,0.5); animation:pulse 2s infinite; }
 @keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(16,185,129,.7); } 70%{ box-shadow:0 0 0 8px rgba(16,185,129,0); } 100%{ box-shadow:0 0 0 0 rgba(16,185,129,0); } }
 
-.hero-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-weight: 800; letter-spacing:-0.02em; font-size:3.5rem; line-height:1.1; margin-bottom:24px; color:var(--band-text); }
+.hero-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-weight: 800; letter-spacing:-0.02em; font-size:clamp(1.9rem, 7vw, 3.5rem); line-height:1.15; margin-bottom:24px; color:var(--band-text); overflow-wrap:break-word; }
 .script-text {
   font-family: var(--font-script), cursive;
   font-weight: 700;
@@ -326,12 +339,21 @@ nav.main-nav a.is-active{
   color: transparent;
   font-family: "Unbounded", "Impact", "Arial Black", sans-serif;
   font-weight: 900;
-  font-size: 4rem;
+  font-size: clamp(1.5rem, 9vw, 4rem);
   letter-spacing: -0.03em;
   white-space: nowrap;
+  display: inline-block;
 }
-.hero-text{ font-size:1.1rem; color:var(--band-dim); max-width:480px; margin-bottom:40px; }
-.cta-row{ display:flex; align-items:center; gap:16px; margin-bottom:48px; }
+@media (max-width:420px){
+  .text-gradient{ white-space:normal; }
+}
+.hero-text{ font-size:1.1rem; color:var(--band-dim); max-width:480px; margin-bottom:40px; overflow-wrap:break-word; }
+.cta-row{ display:flex; align-items:center; gap:16px; margin-bottom:48px; flex-wrap:wrap; }
+@media (max-width:480px){
+  .cta-row{ gap:12px; }
+  .cta-row .btn-glow, .cta-row .btn-outline-arrow{ width:100%; }
+  .btn-glow, .btn-outline-arrow{ justify-content:center; }
+}
 
 .btn-glow {
   display: inline-flex; align-items: center; justify-content: center;
@@ -397,9 +419,14 @@ html[data-theme="dark"] .btn-glow:hover {
 .bento-content { display: flex; flex-direction: column; }
 .bento-content b { font-size: 13px; font-weight: 600; color: var(--band-text); }
 
-/* ============ HERO PHOTO (Brutalist Frame) ============ */
+/* ============ HERO PHOTO (Brutalist Frame) — right side, bleeding off the edge ============ */
 .photo-wrap {
-  position: relative; justify-self: center; margin-top: 20px;
+  position: relative;
+  justify-self: end;
+  margin-right: -60px;
+}
+@media (max-width:900px){
+  .photo-wrap{ justify-self: center; margin-right: 0; margin-top: 20px; }
 }
 .photo-wrap::before {
   content: "";
@@ -428,7 +455,8 @@ html[data-theme="dark"] .btn-glow:hover {
   position: relative; z-index: 2;
   background: var(--bg-elevated);
   border: 2px solid var(--outline);
-  width: 380px; height: 420px;
+  width: min(380px, 78vw);
+  aspect-ratio: 380 / 420;
   border-radius: 20px;
   transform: rotate(-3deg);
   display: flex; align-items: center; justify-content: center;
