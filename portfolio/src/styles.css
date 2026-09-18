@@ -655,38 +655,36 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   z-index: 1;
 }
 
+/* skill cards — same tech-panel DA as the "about" fact blocks:
+   transparent background, dot-grid texture, bracket corners, plus a bounce on hover. */
 .skill-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background-color: transparent;
+  background-image: radial-gradient(rgba(139, 92, 246, 0.16) 1px, transparent 1px);
+  background-size: 14px 14px;
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 10px;
   padding: 24px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   overflow: hidden;
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  cursor: default;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
 }
-
 .skill-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 0 20px rgba(139, 92, 246, 0.05);
+  transform: scale(1.05);
+  border-color: var(--band-accent);
 }
-
-.skill-card-glow {
+.skill-card::before,
+.skill-card::after {
+  content: "";
   position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-  opacity: 0;
+  width: 14px; height: 14px;
+  border-style: solid;
+  border-color: var(--band-accent);
+  opacity: .75;
   pointer-events: none;
-  transition: opacity 0.5s ease;
-  z-index: 0;
 }
-.skill-card:hover .skill-card-glow {
-  opacity: 1;
-}
+.skill-card::before { top: 7px; left: 7px; border-width: 2px 0 0 2px; }
+.skill-card::after { bottom: 7px; right: 7px; border-width: 0 2px 2px 0; }
 
 .skill-card-content {
   position: relative;
@@ -706,13 +704,6 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   color: var(--band-accent);
   border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
-}
-
-.skill-card:hover .skill-icon {
-  background: var(--band-accent);
-  color: #fff;
-  transform: scale(1.1) rotate(5deg);
 }
 
 .skill-icon svg {
@@ -736,24 +727,49 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
 .neon-chip {
   font-size: 13px;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(139, 92, 246, 0.08);
   color: var(--band-dim);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
   padding: 6px 16px;
-  border-radius: 99px;
-  transition: all 0.3s ease;
+  border-radius: 8px;
   cursor: default;
 }
-
-.neon-chip:hover {
-  background: rgba(139, 92, 246, 0.15);
-  color: #fff;
-  border-color: var(--band-accent);
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
-  transform: translateY(-2px);
+.soft-skills-banner {
+  margin-top: 48px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
 }
-.soft-row{ margin-top:38px; position:relative; z-index:1; color:var(--band-dim); font-size:14.5px; }
-.soft-row strong{ color:var(--band-text); }
+@media (max-width: 820px) {
+  .soft-skills-banner { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+.soft-skills-label {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--band-text);
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex: 0 0 auto;
+}
+.soft-skills-label svg {
+  color: var(--band-accent);
+  width: 22px; height: 22px;
+}
+.soft-skills-list {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.soft-chip {
+  font-size: 13px; font-weight: 600; color: var(--band-dim);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 16px; border-radius: 12px;
+}
 
 /* projects */
 .proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:36px 30px; position:relative; z-index:1; }
