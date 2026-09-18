@@ -1,0 +1,25 @@
+<section id="competences" class="band band-alt" style="padding:96px 0;">
+  <div class="container">
+    <div class="sec-head">
+      <div class="watermark">Skills</div>
+      <div class="sec-eyebrow">Savoir-faire</div>
+      <h2 class="sec-title" style="color:var(--band-text);">Compétences</h2>
+      <p class="sec-sub" style="color:var(--band-dim);">Full-stack web et mobile, de l'API sécurisée à l'interface livrée.</p>
+    </div>
+
+    <div class="skills-grid">
+      @for (card of skillCards; track card.title) {
+        <div class="skill-card">
+          <h3>{{ card.title }}</h3>
+          <div class="chip-row">
+            @for (chip of card.chips; track chip) {
+              <span class="chip">{{ chip }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="soft-row"><strong>Transversales :</strong> Travail d'équipe, Gestion du temps, Sens de la communication, Gestion de projet agile</div>
+  </div>
+</section>

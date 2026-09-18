@@ -1,0 +1,42 @@
+<section id="projets" class="paper">
+  <div class="container">
+    <div class="sec-head">
+      <div class="watermark">Projets</div>
+      <div class="sec-eyebrow">Réalisations</div>
+      <h2 class="sec-title">Projets</h2>
+      <p class="sec-sub">Services publics, immobilier, sites WordPress sur-mesure.</p>
+    </div>
+
+    <div class="proj-grid">
+      @for (project of projects; track project.title) {
+        <article class="proj-card">
+          @if (project.image) {
+            <div class="proj-shot"><img [src]="project.image" [alt]="project.imageAlt" loading="lazy"></div>
+          } @else {
+            <div class="proj-shot placeholder">{{ project.placeholderText }}</div>
+          }
+          <div class="proj-body">
+            <span class="proj-title">{{ project.title }}</span>
+            <p class="proj-desc">{{ project.description }}</p>
+            <div class="tag-row">
+              @for (tag of project.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <div class="proj-foot">
+              @if (project.link) {
+                <a class="proj-link" [href]="project.link" target="_blank" rel="noopener">
+                  Voir le site
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6"/></svg>
+                </a>
+              }
+              @if (project.statusBadge) {
+                <span class="status-badge">{{ project.statusBadge }}</span>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

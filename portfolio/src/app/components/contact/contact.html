@@ -1,0 +1,43 @@
+<section id="contact" class="paper">
+  <div class="container">
+    <div class="sec-head">
+      <div class="watermark">Contact</div>
+      <div class="sec-eyebrow">Restons en contact</div>
+      <h2 class="sec-title">Contact</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-list">
+          <div class="contact-row">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 7 9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg></span>
+            <div><div class="label">Email</div><a class="value" href="mailto:reginaalaglo@gmail.com">reginaalaglo&#64;gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.37 1.78.72 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.29a2 2 0 0 1 2.11-.45c.83.35 1.71.6 2.61.72A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div><div class="label">Téléphone</div><div class="value">+228 93 33 36 02 · +228 97 97 28 02</div></div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><div class="label">Adresse</div><div class="value">Rue des Lauriers, Lomé, Togo</div></div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a class="btn btn-ghost" href="https://github.com/Alaglo-Regina" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn btn-ghost" href="https://linkedin.com/in/r%C3%A9gina-alaglo" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn btn-solid" href="mailto:reginaalaglo@gmail.com">Envoyer un email</a>
+        </div>
+      </div>
+
+      <div class="refs">
+        @for (ref of references; track ref.name) {
+          <div class="ref-card">
+            <div class="ref-name">{{ ref.name }}</div>
+            <div class="ref-role">{{ ref.role }}</div>
+            <div class="ref-contact">{{ ref.contact }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
