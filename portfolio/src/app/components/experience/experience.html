@@ -3,38 +3,61 @@
     <div class="sec-head">
       <div class="watermark">Parcours</div>
       <div class="sec-eyebrow">Parcours</div>
-      <h2 class="sec-title" style="color:var(--band-text);">Expériences professionnelles</h2>
+      <h2 class="sec-title" style="color:var(--band-text);">Mon parcours</h2>
     </div>
 
-    <div class="timeline">
-      @for (job of jobs; track job.role) {
-        <div class="t-item">
-          <div class="t-date">{{ job.date }}</div>
-          <div>
-            <div class="t-role">{{ job.role }}</div>
-            <div class="t-org">{{ job.org }}</div>
-            @if (job.bullets) {
-              <ul>
-                @for (bullet of job.bullets; track bullet) {
-                  <li>{{ bullet }}</li>
+    <div class="parcours-block">
+      <h3 class="parcours-subtitle">Expérience professionnelle</h3>
+      <div class="experience-grid">
+        @for (job of jobs; track job.role; let i = $index) {
+          <div class="t-card layout-row sticky-card" [style.top.px]="120 + (i * 24)">
+            @if (job.logos) {
+              <div class="t-card-logos">
+                @for (logo of job.logos; track logo) {
+                  <img [src]="logo" alt="Logo">
                 }
-              </ul>
+              </div>
             }
+            <div class="t-card-body">
+              <span class="t-date" [class.is-current]="job.current">
+                @if (job.current) { <span class="t-pulse"></span> }
+                {{ job.date }}
+              </span>
+              <div class="t-role">{{ job.role }}</div>
+              <div class="t-org">{{ job.org }}</div>
+              @if (job.bullets) {
+                <ul>
+                  @for (bullet of job.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              }
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
 
-    <div class="timeline" id="formation" style="margin-top:20px;">
-      @for (item of education; track item.role) {
-        <div class="t-item">
-          <div class="t-date">{{ item.date }}</div>
-          <div>
-            <div class="t-role">{{ item.role }}</div>
-            <div class="t-org">{{ item.org }}</div>
+    <div class="parcours-block" id="formation">
+      <h3 class="parcours-subtitle">Formation</h3>
+      <div class="experience-grid">
+        @for (item of education; track item.role; let i = $index) {
+          <div class="t-card layout-row sticky-card" [style.top.px]="120 + (i * 24)">
+            @if (item.logos) {
+              <div class="t-card-logos">
+                @for (logo of item.logos; track logo) {
+                  <img [src]="logo" alt="Logo">
+                }
+              </div>
+            }
+            <div class="t-card-body">
+              <span class="t-date">{{ item.date }}</span>
+              <div class="t-role">{{ item.role }}</div>
+              <div class="t-org">{{ item.org }}</div>
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
   </div>
 </section>
