@@ -11,8 +11,8 @@
       <form #contactForm class="contact-form contact-card reveal reveal-delay-1" (submit)="onSubmit($event)">
         <div class="form-row-group">
           <div class="form-row">
-            <label for="contact-name">Nom</label>
-            <input id="contact-name" name="name" type="text" placeholder="Votre nom" required />
+            <label for="contact-name">Nom & Prénom</label>
+            <input id="contact-name" name="name" type="text" minlength="6" maxlength="14" placeholder="Votre nom" required />
           </div>
           <div class="form-row">
             <label for="contact-email">Email</label>
