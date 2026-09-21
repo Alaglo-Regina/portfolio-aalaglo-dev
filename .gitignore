@@ -11,8 +11,12 @@
 npm-debug.log
 yarn-error.log
 
+# Généré depuis .env par scripts/set-env.js (voir .env.example)
+/src/environments/environment.ts
+
 # IDEs and editors
 .idea/
+.env
 .project
 .classpath
 .c9/
