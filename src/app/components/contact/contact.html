@@ -8,27 +8,52 @@
     </div>
 
     <div class="contact-grid">
-      <form #contactForm class="contact-form contact-card reveal reveal-delay-1" (submit)="onSubmit($event)">
+      <form #contactForm #contactNgForm="ngForm" class="contact-form contact-card reveal reveal-delay-1" (ngSubmit)="onSubmit()">
         <div class="form-row-group">
           <div class="form-row">
             <label for="contact-name">Nom & Prénom</label>
-            <input id="contact-name" name="name" type="text" minlength="6" maxlength="14" placeholder="Votre nom" required />
+            <input id="contact-name" name="name" type="text" placeholder="Votre nom" ngModel required minlength="6" maxlength="14" #nameField="ngModel" />
+            @if (nameField.invalid && nameField.touched) {
+              <span class="field-error">
+                @if (nameField.errors?.['required']) { Le nom est obligatoire. }
+                @if (nameField.errors?.['minlength']) { Le nom doit contenir au moins 6 caractères. }
+                @if (nameField.errors?.['maxlength']) { Le nom ne doit pas dépasser 14 caractères. }
+              </span>
+            }
           </div>
           <div class="form-row">
             <label for="contact-email">Email</label>
-            <input id="contact-email" name="email" type="email" placeholder="votre@email.com" required />
+            <input id="contact-email" name="email" type="email" placeholder="votre@email.com" ngModel required email #emailField="ngModel" />
+            @if (emailField.invalid && emailField.touched) {
+              <span class="field-error">
+                @if (emailField.errors?.['required']) { L'email est obligatoire. }
+                @if (emailField.errors?.['email']) { Veuillez entrer une adresse email valide. }
+              </span>
+            }
           </div>
         </div>
         <div class="form-row">
           <label for="contact-subject">Sujet</label>
-          <input id="contact-subject" name="subject" type="text" placeholder="Le sujet de votre message" required />
+          <input id="contact-subject" name="subject" type="text" placeholder="Le sujet de votre message" ngModel required minlength="3" #subjectField="ngModel" />
+          @if (subjectField.invalid && subjectField.touched) {
+            <span class="field-error">
+              @if (subjectField.errors?.['required']) { Le sujet est obligatoire. }
+              @if (subjectField.errors?.['minlength']) { Le sujet doit contenir au moins 3 caractères. }
+            </span>
+          }
         </div>
         <div class="form-row" style="flex: 1; display: flex; flex-direction: column;">
           <label for="contact-message">Message</label>
-          <textarea id="contact-message" name="message" rows="6" placeholder="Votre message..." required style="flex: 1; resize: none;"></textarea>
+          <textarea id="contact-message" name="message" rows="6" placeholder="Votre message..." ngModel required minlength="10" #messageField="ngModel" style="flex: 1; resize: none;"></textarea>
+          @if (messageField.invalid && messageField.touched) {
+            <span class="field-error">
+              @if (messageField.errors?.['required']) { Le message est obligatoire. }
+              @if (messageField.errors?.['minlength']) { Le message doit contenir au moins 10 caractères. }
+            </span>
+          }
         </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-          <button class="btn-glow" type="submit" [disabled]="isSending" style="border: none; cursor: pointer; padding-left: 28px; padding-right: 28px; gap: 8px;">
+          <button class="btn-glow" type="submit" [disabled]="isSending || contactNgForm.invalid" style="border: none; cursor: pointer; padding-left: 28px; padding-right: 28px; gap: 8px;">
             {{ isSending ? 'Envoi en cours...' : 'Envoyer le message' }}
             @if (isSending) {
               <span class="btn-spinner" aria-hidden="true"></span>

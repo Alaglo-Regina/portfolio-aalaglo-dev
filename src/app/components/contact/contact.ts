@@ -1,14 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './contact.html',
 })
 export class Contact {
   @ViewChild('contactForm') private contactFormRef!: ElementRef<HTMLFormElement>;
+  @ViewChild('contactNgForm') private contactNgFormRef!: NgForm;
 
   // Identifiants EmailJS injectés depuis .env par scripts/set-env.js au moment du build/serve.
   private readonly emailjsServiceId = environment.emailjsServiceId;
@@ -19,9 +21,8 @@ export class Contact {
   sendStatus: 'idle' | 'success' | 'error' = 'idle';
   private statusTimeoutId?: ReturnType<typeof setTimeout>;
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    if (this.isSending) {
+  onSubmit(): void {
+    if (this.isSending || this.contactNgFormRef.invalid) {
       return;
     }
 
@@ -35,7 +36,7 @@ export class Contact {
       })
       .then(() => {
         this.sendStatus = 'success';
-        this.contactFormRef.nativeElement.reset();
+        this.contactNgFormRef.resetForm();
       })
       .catch((error) => {
         console.error('Erreur envoi EmailJS:', error);

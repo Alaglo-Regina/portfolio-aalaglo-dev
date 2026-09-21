@@ -1208,6 +1208,18 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   border-color: var(--band-accent);
   box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
 }
+.form-row input.ng-invalid.ng-touched,
+.form-row textarea.ng-invalid.ng-touched{
+  border-color: #DC2626;
+}
+.form-row input.ng-invalid.ng-touched:focus,
+.form-row textarea.ng-invalid.ng-touched:focus{
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
+}
+.field-error{
+  font-size: 12px;
+  color: #DC2626;
+}
 .contact-submit{
   align-self: flex-start;
 }
