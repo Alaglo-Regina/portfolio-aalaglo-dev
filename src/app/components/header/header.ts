@@ -5,6 +5,7 @@ interface Indicator {
   left: number;
   percentage: number;
   visible: boolean;
+  isActiveHover: boolean;
 }
 
 @Component({
@@ -17,7 +18,7 @@ export class Header implements OnInit, OnDestroy {
   protected readonly theme = inject(Theme);
   private readonly el = inject(ElementRef);
   protected readonly menuOpen = signal(false);
-  protected readonly indicator = signal<Indicator>({ left: 0, percentage: 0, visible: false });
+  protected readonly indicator = signal<Indicator>({ left: 0, percentage: 0, visible: false, isActiveHover: true });
   protected activeSectionId = signal<string>('accueil');
   protected readonly currentLang = signal<'fr' | 'en'>('fr');
   protected readonly scrollProgress = signal<number>(0);
@@ -75,11 +76,11 @@ export class Header implements OnInit, OnDestroy {
     const activeId = this.activeSectionId();
     const linkEl = this.el.nativeElement.querySelector(`nav.main-nav a[href="#${activeId}"]`) as HTMLElement;
     if (linkEl) {
-      this.updateIndicator(linkEl);
+      this.updateIndicator(linkEl, true);
     }
   }
 
-  private updateIndicator(link: HTMLElement) {
+  private updateIndicator(link: HTMLElement, isActiveHover: boolean) {
     const nav = link.parentElement as HTMLElement;
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
@@ -89,7 +90,8 @@ export class Header implements OnInit, OnDestroy {
     this.indicator.set({
       left,
       percentage,
-      visible: true
+      visible: true,
+      isActiveHover
     });
   }
 
@@ -107,7 +109,8 @@ export class Header implements OnInit, OnDestroy {
 
   onLinkHover(event: MouseEvent): void {
     const link = event.currentTarget as HTMLElement;
-    this.updateIndicator(link);
+    const isActiveHover = link.getAttribute('href') === `#${this.activeSectionId()}`;
+    this.updateIndicator(link, isActiveHover);
   }
 
   onNavLeave(): void {

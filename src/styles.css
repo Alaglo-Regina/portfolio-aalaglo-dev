@@ -184,6 +184,11 @@ nav.main-nav a.is-active{
   stroke-width:1.5;
   stroke-linecap:round;
   opacity:.4;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+.nav-snake.is-hovering-inactive path {
+  stroke: var(--band-accent);
+  opacity: 0.15;
 }
 .nav-dot{
   position:absolute; left:0; bottom:-6px;
@@ -192,8 +197,12 @@ nav.main-nav a.is-active{
   background:var(--band-accent);
   opacity:0;
   transform:translateX(0) scale(.4);
-  transition:transform 0.7s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+  transition:transform 0.7s cubic-bezier(.34,1.56,.64,1), opacity .3s ease, background 0.3s ease;
   pointer-events:none;
+}
+.nav-dot.is-hovering-inactive{
+  background: var(--band-accent);
+  opacity: 0.35 !important;
 }
 .nav-dot.is-active{ opacity:1; transform:translateX(var(--dot-x, 0px)) scale(1); }
 .nav-right{ display:flex; align-items:center; gap:16px; }
@@ -1225,6 +1234,8 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: flex; flex-direction: column; gap: 20px;
 }
+html[data-theme="light"] .calendly-dark { display: none !important; }
+html[data-theme="dark"] .calendly-light { display: none !important; }
 .form-row-group {
   display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
 }
