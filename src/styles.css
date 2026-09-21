@@ -1172,6 +1172,11 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
 
 .contact-option {
   display: flex; flex-direction: column; gap: 24px;
+  /* Le widget Calendly redimensionne lui-même son iframe en JS une fois chargé :
+     forcer les deux colonnes à la même hauteur (stretch) laisse un vide sous
+     l'une des deux cartes selon celle qui est la plus haute. Chaque colonne
+     garde donc sa propre hauteur naturelle. */
+  align-self: start;
 }
 
 .contact-option-header {
@@ -1219,9 +1224,7 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: flex; flex-direction: column; gap: 20px;
-  flex: 1 1 auto;
 }
-.calendar-widget .calendly-inline-widget{ flex: 1 1 auto; }
 .form-row-group {
   display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
 }
