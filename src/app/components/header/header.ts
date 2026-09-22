@@ -25,7 +25,6 @@ export class Header implements OnInit, OnDestroy {
   private observer: IntersectionObserver | null = null;
 
   readonly navLinks = [
-    { href: '#accueil', label: 'Accueil' },
     { href: '#apropos', label: 'À propos' },
     { href: '#competences', label: 'Compétences' },
     { href: '#projets', label: 'Projets' },
