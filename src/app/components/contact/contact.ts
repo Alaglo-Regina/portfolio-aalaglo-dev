@@ -1,7 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../../environments/environment';
+import { Theme } from '../../core/services/theme';
+
+// Fourni globalement par le script https://assets.calendly.com/assets/external/widget.js (chargé dans index.html).
+declare const Calendly: { initPopupWidget(options: { url: string }): void } | undefined;
 
 @Component({
   selector: 'app-contact',
@@ -9,6 +13,8 @@ import { environment } from '../../../environments/environment';
   templateUrl: './contact.html',
 })
 export class Contact {
+  private readonly theme = inject(Theme);
+
   @ViewChild('contactForm') private contactFormRef!: ElementRef<HTMLFormElement>;
   @ViewChild('contactNgForm') private contactNgFormRef!: NgForm;
 
@@ -80,6 +86,20 @@ export class Contact {
   closeStatusPopup(): void {
     clearTimeout(this.statusTimeoutId);
     this.sendStatus = 'idle';
+  }
+
+  openCalendlyPopup(): void {
+    const isDark = this.theme.current() === 'dark';
+    const url = isDark
+      ? 'https://calendly.com/reginaalaglo/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=8b5cf6&background_color=18181b&text_color=ffffff'
+      : 'https://calendly.com/reginaalaglo/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=8b5cf6&background_color=ffffff&text_color=18181b';
+
+    if (typeof Calendly === 'undefined') {
+      window.open(url, '_blank', 'noopener');
+      return;
+    }
+
+    Calendly.initPopupWidget({ url });
   }
 
 }

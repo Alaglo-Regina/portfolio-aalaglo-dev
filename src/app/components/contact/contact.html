@@ -91,9 +91,26 @@
           <p>Pour un échange de vive voix de 30 minutes.</p>
         </div>
         <div class="calendar-widget reveal reveal-delay-2">
-          <!-- Calendly widgets for Light and Dark modes. widget.js will initialize both, and CSS will toggle visibility based on theme -->
-          <div class="calendly-inline-widget calendly-light" data-url="https://calendly.com/reginaalaglo/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=8b5cf6&background_color=ffffff&text_color=18181b" style="min-width:320px; width: 100%; height: 680px;"></div>
-          <div class="calendly-inline-widget calendly-dark" data-url="https://calendly.com/reginaalaglo/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=8b5cf6&background_color=18181b&text_color=ffffff" style="min-width:320px; width: 100%; height: 680px;"></div>
+          <div class="calendar-widget-cta">
+            <div class="calendar-widget-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <p class="calendar-widget-text">Choisissez le créneau qui vous convient : l'agenda Calendly s'ouvre dans une fenêtre dédiée.</p>
+            <button type="button" class="btn-glow" (click)="openCalendlyPopup()" style="border: none; cursor: pointer; padding-left: 28px; padding-right: 28px; gap: 8px;">
+              Prendre rendez-vous
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>

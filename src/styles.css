@@ -1181,10 +1181,8 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
 
 .contact-option {
   display: flex; flex-direction: column; gap: 24px;
-  /* Le widget Calendly redimensionne lui-même son iframe en JS une fois chargé :
-     forcer les deux colonnes à la même hauteur (stretch) laisse un vide sous
-     l'une des deux cartes selon celle qui est la plus haute. Chaque colonne
-     garde donc sa propre hauteur naturelle. */
+  /* Les deux colonnes n'ont pas la même hauteur naturelle : forcer le stretch
+     laisserait un vide sous la plus courte des deux cartes. */
   align-self: start;
 }
 
@@ -1234,8 +1232,18 @@ h2.sec-title{ font-family:"Space Grotesk", "Segoe UI", sans-serif; font-size:cla
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: flex; flex-direction: column; gap: 20px;
 }
-html[data-theme="light"] .calendly-dark { display: none !important; }
-html[data-theme="dark"] .calendly-light { display: none !important; }
+.calendar-widget-cta {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 16px; flex: 1; padding: 40px 16px;
+}
+.calendar-widget-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(139, 92, 246, 0.12); color: var(--band-accent);
+}
+.calendar-widget-text {
+  color: var(--text-dim); font-size: 14.5px; max-width: 320px; margin: 0;
+}
 .form-row-group {
   display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
 }
