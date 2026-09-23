@@ -63,8 +63,11 @@
             </span>
           }
         </div>
+        <div class="form-row turnstile-row">
+          <app-turnstile (tokenChange)="onTurnstileToken($event)" (expired)="onTurnstileExpired()" (error)="onTurnstileError()" />
+        </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 8px;">
-          <button class="btn-glow" type="submit" [disabled]="isSending || contactNgForm.invalid" style="border: none; cursor: pointer; padding-left: 28px; padding-right: 28px; gap: 8px;">
+          <button class="btn-glow" type="submit" [disabled]="isSending || contactNgForm.invalid || !turnstileToken" style="border: none; cursor: pointer; padding-left: 28px; padding-right: 28px; gap: 8px;">
             {{ isSending ? 'Envoi en cours...' : 'Envoyer le message' }}
             @if (isSending) {
               <span class="btn-spinner" aria-hidden="true"></span>
@@ -128,7 +131,7 @@
         @if (sendStatus === 'success') {
           Message envoyé avec succès !
         } @else {
-          Une erreur est survenue, le message n'a pas pu être envoyé. Réessayez ou écrivez-moi directement.
+          {{ errorMessage }}
         }
       </span>
       <button type="button" class="contact-toast-close" (click)="closeStatusPopup()" aria-label="Fermer la notification">✕</button>

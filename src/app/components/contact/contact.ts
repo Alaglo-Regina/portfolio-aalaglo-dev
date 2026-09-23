@@ -3,13 +3,16 @@ import { FormsModule, NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { environment } from '../../../environments/environment';
 import { Theme } from '../../core/services/theme';
+import { Turnstile } from '../turnstile/turnstile';
 
 // Fourni globalement par le script https://assets.calendly.com/assets/external/widget.js (chargé dans index.html).
 declare const Calendly: { initPopupWidget(options: { url: string }): void } | undefined;
 
+const DEFAULT_ERROR_MESSAGE = "Une erreur est survenue, le message n'a pas pu être envoyé. Réessayez ou écrivez-moi directement.";
+
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule],
+  imports: [FormsModule, Turnstile],
   templateUrl: './contact.html',
 })
 export class Contact {
@@ -17,6 +20,7 @@ export class Contact {
 
   @ViewChild('contactForm') private contactFormRef!: ElementRef<HTMLFormElement>;
   @ViewChild('contactNgForm') private contactNgFormRef!: NgForm;
+  @ViewChild(Turnstile) private turnstileRef?: Turnstile;
 
   // Identifiants EmailJS injectés depuis .env par scripts/set-env.js au moment du build/serve.
   private readonly emailjsServiceId = environment.emailjsServiceId;
@@ -25,6 +29,8 @@ export class Contact {
 
   isSending = false;
   sendStatus: 'idle' | 'success' | 'error' = 'idle';
+  errorMessage = DEFAULT_ERROR_MESSAGE;
+  turnstileToken: string | null = null;
   private statusTimeoutId?: ReturnType<typeof setTimeout>;
 
   private static readonly MAX_LENGTHS = { name: 100, email: 180, subject: 150, message: 3000 };
@@ -42,8 +48,8 @@ export class Contact {
       .slice(0, maxLength);
   }
 
-  onSubmit(): void {
-    if (this.isSending || this.contactNgFormRef.invalid) {
+  async onSubmit(): Promise<void> {
+    if (this.isSending || this.contactNgFormRef.invalid || !this.turnstileToken) {
       return;
     }
 
@@ -64,23 +70,48 @@ export class Contact {
     clearTimeout(this.statusTimeoutId);
     this.isSending = true;
     this.sendStatus = 'idle';
+    this.errorMessage = DEFAULT_ERROR_MESSAGE;
 
-    emailjs
-      .send(this.emailjsServiceId, this.emailjsTemplateId, { name, email, subject, message }, {
-        publicKey: this.emailjsPublicKey,
-      })
-      .then(() => {
-        this.sendStatus = 'success';
-        this.contactNgFormRef.resetForm();
-      })
-      .catch((error: any) => {
-        console.error('Erreur envoi EmailJS:', error);
-        this.sendStatus = 'error';
-      })
-      .finally(() => {
-        this.isSending = false;
-        this.statusTimeoutId = setTimeout(() => this.closeStatusPopup(), 6000);
+    try {
+      const verifyRes = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ turnstileToken: this.turnstileToken }),
       });
+      const verifyData = await verifyRes.json().catch(() => ({ success: false }));
+
+      if (!verifyRes.ok || !verifyData.success) {
+        this.errorMessage = 'La vérification anti-spam a échoué ou a expiré. Merci de recommencer.';
+        this.sendStatus = 'error';
+        return;
+      }
+
+      await emailjs.send(this.emailjsServiceId, this.emailjsTemplateId, { name, email, subject, message }, {
+        publicKey: this.emailjsPublicKey,
+      });
+      this.sendStatus = 'success';
+      this.contactNgFormRef.resetForm();
+    } catch (error) {
+      console.error('Erreur envoi du formulaire de contact:', error);
+      this.sendStatus = 'error';
+    } finally {
+      this.isSending = false;
+      this.turnstileToken = null;
+      this.turnstileRef?.reset();
+      this.statusTimeoutId = setTimeout(() => this.closeStatusPopup(), 6000);
+    }
+  }
+
+  onTurnstileToken(token: string): void {
+    this.turnstileToken = token;
+  }
+
+  onTurnstileExpired(): void {
+    this.turnstileToken = null;
+  }
+
+  onTurnstileError(): void {
+    this.turnstileToken = null;
   }
 
   closeStatusPopup(): void {

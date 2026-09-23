@@ -7,7 +7,12 @@ const path = require('path');
 
 const envPath = path.resolve(__dirname, '..', '.env');
 const outputPath = path.resolve(__dirname, '..', 'src', 'environments', 'environment.ts');
-const requiredKeys = ['EMAILJS_SERVICE_ID', 'EMAILJS_TEMPLATE_ID', 'EMAILJS_PUBLIC_KEY'];
+const requiredKeys = ['EMAILJS_SERVICE_ID', 'EMAILJS_TEMPLATE_ID', 'EMAILJS_PUBLIC_KEY', 'TURNSTILE_SITE_KEY'];
+// Clé de test Cloudflare Turnstile ("toujours réussie") : utilisée par défaut
+// en local si TURNSTILE_SITE_KEY n'est pas définie, pour ne jamais bloquer le
+// développement. À ne pas utiliser en production (définir TURNSTILE_SITE_KEY
+// avec la vraie clé du widget dans les variables d'environnement Vercel).
+const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
 
 function parseEnvFile(content) {
   const result = {};
@@ -38,6 +43,9 @@ const env = {};
 for (const key of requiredKeys) {
   env[key] = process.env[key] || fileEnv[key] || '';
 }
+if (!env.TURNSTILE_SITE_KEY) {
+  env.TURNSTILE_SITE_KEY = TURNSTILE_TEST_SITE_KEY;
+}
 
 const missing = requiredKeys.filter((key) => !env[key]);
 if (missing.length) {
@@ -56,6 +64,7 @@ export const environment = {
   emailjsServiceId: '${escape(env.EMAILJS_SERVICE_ID)}',
   emailjsTemplateId: '${escape(env.EMAILJS_TEMPLATE_ID)}',
   emailjsPublicKey: '${escape(env.EMAILJS_PUBLIC_KEY)}',
+  turnstileSiteKey: '${escape(env.TURNSTILE_SITE_KEY)}',
 };
 `;
 
