@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 export interface TurnstileRenderOptions {
   sitekey: string;
   theme?: 'light' | 'dark' | 'auto';
+  size?: 'normal' | 'compact' | 'flexible';
+  appearance?: 'always' | 'execute' | 'interaction-only';
   callback?: (token: string) => void;
   'expired-callback'?: () => void;
   'error-callback'?: (errorCode?: string) => void;

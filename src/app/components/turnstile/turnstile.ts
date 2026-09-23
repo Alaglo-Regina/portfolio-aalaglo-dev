@@ -10,6 +10,11 @@ import { TurnstileLoader } from '../../core/services/turnstile-loader';
 export class Turnstile implements AfterViewInit, OnDestroy {
   @Input() siteKey = environment.turnstileSiteKey;
   @Input() theme: 'light' | 'dark' | 'auto' = 'auto';
+  // 'flexible' épouse la largeur du formulaire au lieu du bloc fixe 300px par défaut.
+  @Input() size: 'normal' | 'compact' | 'flexible' = 'flexible';
+  // 'interaction-only' : invisible tant que Cloudflare n'exige pas de vérification
+  // visuelle (la grande majorité des visiteurs légitimes ne voient jamais le widget).
+  @Input() appearance: 'always' | 'execute' | 'interaction-only' = 'interaction-only';
 
   @Output() tokenChange = new EventEmitter<string>();
   @Output() expired = new EventEmitter<void>();
@@ -30,6 +35,8 @@ export class Turnstile implements AfterViewInit, OnDestroy {
     this.widgetId = turnstile.render(this.containerRef.nativeElement, {
       sitekey: this.siteKey,
       theme: this.theme,
+      size: this.size,
+      appearance: this.appearance,
       callback: (token) => this.tokenChange.emit(token),
       'expired-callback': () => this.expired.emit(),
       'error-callback': () => this.error.emit(),
