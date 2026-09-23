@@ -30,16 +30,22 @@ function parseEnvFile(content) {
   return result;
 }
 
-if (!fs.existsSync(envPath)) {
-  console.error('[set-env] Fichier .env introuvable à la racine du projet.');
-  console.error('[set-env] Copie .env.example vers .env et renseigne tes identifiants EmailJS.');
-  process.exit(1);
+// Sources par ordre de priorité : les variables d'environnement déjà présentes
+// (cas d'un hébergeur comme Vercel, qui n'a pas de fichier .env) puis, en local
+// uniquement, le fichier .env s'il existe.
+const fileEnv = fs.existsSync(envPath) ? parseEnvFile(fs.readFileSync(envPath, 'utf8')) : {};
+const env = {};
+for (const key of requiredKeys) {
+  env[key] = process.env[key] || fileEnv[key] || '';
 }
 
-const env = parseEnvFile(fs.readFileSync(envPath, 'utf8'));
 const missing = requiredKeys.filter((key) => !env[key]);
 if (missing.length) {
-  console.warn(`[set-env] Variables manquantes dans .env: ${missing.join(', ')}`);
+  console.warn(`[set-env] Variables manquantes: ${missing.join(', ')}`);
+  if (!fs.existsSync(envPath)) {
+    console.warn('[set-env] Aucun fichier .env trouvé. En local, copie .env.example vers .env et renseigne tes identifiants EmailJS.');
+    console.warn("[set-env] Sur l'hébergeur (Vercel...), configure ces variables dans les réglages du projet (Environment Variables).");
+  }
 }
 
 const escape = (value) => (value ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
@@ -55,4 +61,4 @@ export const environment = {
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, fileContent, 'utf8');
-console.log('[set-env] src/environments/environment.ts généré depuis .env');
+console.log('[set-env] src/environments/environment.ts généré');
